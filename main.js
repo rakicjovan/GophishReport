@@ -1,17 +1,18 @@
-import { ridAlternative } from './constants.js';
-import { serverInstanceUrl } from './constants.js';
+const ridAlternative = "keyname";
 
-let testP = document.getElementById("testP");
+let headP = document.getElementById("headP");
 let ridRegex = /https:\/\/[A-Za-z]+\.[A-Za-z][A-Za-z]\/\?rid=[A-Za-z0-9]+/i;
+let reportButton = document.getElementById("reportButton");
 
 if (ridAlternative) {
-    ridRegex = new RegExp(/https:\/\/[A-Za-z]+\.[A-Za-z][A-Za-z]\/\?${ridAlternative}=[A-Za-z0-9]+/i);
+    ridRegex = new RegExp('https://[A-Za-z]+\\.[A-Za-z][A-Za-z]/\\?' + ridAlternative + '=[A-Za-z0-9]+', 'i');
+    console.log(ridRegex);
 }
 
 Office.onReady((info) => {
     // Office is ready
     if (info.host === Office.HostType.Outlook) {
-        //testP.appendChild(document.createElement("p").appendChild(document.createTextNode("This is a new paragraph!")));
+        //headP.appendChild(document.createElement("p").appendChild(document.createTextNode("This is a new paragraph!")));
         // Assign event handler to the button click
         document.getElementById("reportButton").onclick = parseMessage;
     }
@@ -19,7 +20,6 @@ Office.onReady((info) => {
 
 // Event handler for the button click
 function parseMessage() {
-    //testP.appendChild(document.createElement("p").appendChild(document.createTextNode("This is a new paragraph!")));
     // Get the current item
     Office.context.mailbox.item.body.getAsync(
         Office.CoercionType.Html,
@@ -28,12 +28,8 @@ function parseMessage() {
                 // Parse the message content
                 var messageContent = result.value;
 
-                // Display the parsed message content in a new window
-                //console.log(messageContent);
-                console.log(typeof messageContent);
-
                 if (ridRegex.test(messageContent)) {
-                    testP.innerHTML = "This mail is reported!";
+                    headP.innerHTML = "This mail is reported!";
                     let ridUrl = messageContent.match(ridRegex)[0];
                     console.log(ridUrl);
                     let transformedURL = ridUrl.replace(/\?rid=\d+/, "report" + ridUrl.substring(ridUrl.indexOf('?')));
@@ -41,7 +37,7 @@ function parseMessage() {
                     webReport(transformedURL);
 
                 } else {
-                    testP.innerHTML = "This mail is not reported!";
+                    headP.innerHTML = "This mail is not reported!";
                 };
 
             } else {
@@ -56,13 +52,18 @@ async function webReport(reportUrl) {
         const response = await fetch(reportUrl);
 
         if (!response.ok) {
+            console.log("test");
+            reportButton.disabled = true;
             throw new Error(response.status);
         }
         else {
-            testP.innerHTML = response.status;
+            headP.innerHTML = "Successfully reported the mail, you can delete it now!" + response.status;
+            reportButton.disabled = true;
         }
     }
     catch (error) {
-        testP.innerHTML = "Error: " + error;
+        console.log("test");
+        headP.innerHTML = "Error: " + error;
+        document.getElementById("reportButton").disabled = true;
     }
 };

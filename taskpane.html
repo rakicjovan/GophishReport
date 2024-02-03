@@ -1,22 +1,27 @@
-<!-- taskpane.html -->
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Hello World Add-in</title>
-    <p id="testP">Do you want to report this Mail?</p>
+    <p id="headP">Do you want to report this Mail?</p>
     <!-- Add your styles and scripts here -->
+    <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
     <script src="main.js"></script> 
 </head>
 
 <body>
-    <button id="reportButton">Report this Mail!</button>
+    <div class="buttonContainer">
+        <button id="reportButton">Report this Mail!</button>
+    </div>
 
-    <script>
-        
-    </script>
+    <div class="siteFooter">
+        <div class="footerContent">
+            <img src="assets/logo_purple.png" alt="Logo" />
+            <p id="footText">&copy; 2024 Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>    
+            <div class="info-box">ℹ️</div>
+        </div>
+    </div>
 </body>
 
 </html>

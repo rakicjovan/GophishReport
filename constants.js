@@ -1,4 +1,4 @@
 // const variables
 
-export const ridAlternative = "";
+export const ridAlternative = "keyname";
 export const serverInstanceUrl = "yourdomain.com";
