@@ -15,11 +15,24 @@
         <button id="reportButton">Report this Mail!</button>
     </div>
 
+    <div id="wrapperId" class="wrapper">
+        
+    </div>
+
+    <div class="info-modal" id="infoModal">
+        <div class="info-content">
+            <div class="close-button" onclick="closeInfoBox()">✖️</div>
+            <p>This Add In is licensed under the MIT License.</p>
+            <p>You can find more informations on the GitHub Repo:</p>
+            <button onclick="openGitHub()">GitHub</button>         
+        </div>
+    </div>
+
     <div class="siteFooter">
         <div class="footerContent">
             <img src="assets/logo_purple.png" alt="Logo" />
             <p id="footText">&copy; 2024 Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>    
-            <div class="info-box">ℹ️</div>
+            <div class="info-box" onclick="showInfoBox()">ℹ️</div>
         </div>
     </div>
 </body>
