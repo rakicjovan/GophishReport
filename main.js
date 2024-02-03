@@ -1,5 +1,12 @@
+import { ridAlternative } from './constants.js';
+import { serverInstanceUrl } from './constants.js';
+
 let testP = document.getElementById("testP");
 let ridRegex = /https:\/\/[A-Za-z]+\.[A-Za-z][A-Za-z]\/\?rid=[A-Za-z0-9]+/i;
+
+if (ridAlternative) {
+    ridRegex = new RegExp(/https:\/\/[A-Za-z]+\.[A-Za-z][A-Za-z]\/\?${ridAlternative}=[A-Za-z0-9]+/i);
+}
 
 Office.onReady((info) => {
     // Office is ready

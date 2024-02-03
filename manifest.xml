@@ -5,15 +5,15 @@
   xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="MailApp">
   <Id>1e7e38da-7ad6-429a-9c6f-81aa1b9c9344</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Contoso</ProviderName>
+  <ProviderName>Gophish</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Hello world"/>
-  <Description DefaultValue="A simple hello world Office Add-in."/>
+  <DisplayName DefaultValue="Goreport"/>
+  <Description DefaultValue="Spam reporting tool"/>
   <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
   <SupportUrl DefaultValue="https://learn.microsoft.com/office/dev/add-ins/overview/office-add-in-code-samples"/>
   <AppDomains>
-    <AppDomain>https://www.contoso.com</AppDomain>
+    <AppDomain>https://github.com/jole583/Goreport</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Mailbox"/>
@@ -46,31 +46,6 @@
     <Hosts>
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
-
-            <!-- Message Compose -->
-            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
-                <OfficeTab id="TabDefault">
-                <Group id="msgComposeCmdGroup">
-                    <Label resid="CommandsGroup.Label"/>
-                    <Control xsi:type="Button" id="msgComposeInsertGist">
-                    <Label resid="TaskpaneButton.Label"/>
-                    <Supertip>
-                        <Title resid="TaskpaneButton.SupertipTitle"/>
-                        <Description resid="TaskpaneButton.SupertipText"/>
-                    </Supertip>
-                    <Icon>
-                        <bt:Image size="16" resid="Icon.16x16"/>
-                        <bt:Image size="32" resid="Icon.32x32"/>
-                        <bt:Image size="80" resid="Icon.80x80"/>
-                    </Icon>
-                    <Action xsi:type="ShowTaskpane">
-                        <SourceLocation resid="Taskpane.Url"/>
-                    </Action>
-                    </Control>
-                </Group>
-                </OfficeTab>
-            </ExtensionPoint>
-
              <!-- Message Read -->
             <ExtensionPoint xsi:type="MessageReadCommandSurface">
                 <OfficeTab id="TabDefault">
@@ -94,7 +69,6 @@
                     </Group>
                 </OfficeTab>
             </ExtensionPoint>
-
         </DesktopFormFactor>
       </Host>
     </Hosts>
@@ -108,12 +82,12 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="CommandsGroup.Label" DefaultValue="Contoso Add-in"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Hello world"/>
-        <bt:String id="TaskpaneButton.SupertipTitle" DefaultValue="Hello world"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="Goreport"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Report Spam"/>
+        <bt:String id="TaskpaneButton.SupertipTitle" DefaultValue="Goreport"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="TaskpaneButton.SupertipText" DefaultValue="Open the Hello world add-in"/>
+        <bt:String id="TaskpaneButton.SupertipText" DefaultValue="Open the report add-in"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
