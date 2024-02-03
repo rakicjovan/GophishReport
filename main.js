@@ -59,12 +59,3 @@ async function webReport(reportUrl) {
         testP.innerHTML = "Error: " + error;
     }
 };
-
-// Function to display parsed message content in a new window
-function displayParsedMessage(messageContent) {
-    // Create a new window
-    var newWindow = window.open("", "_blank", "width=600,height=400");
-
-    // Display the parsed message content in the new window
-    newWindow.document.write("<html><body><pre>" + messageContent + "</pre></body></html>");
-}
