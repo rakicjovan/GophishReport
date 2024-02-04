@@ -15,8 +15,6 @@ if (ridAlternative) {
 Office.onReady((info) => {
     // Office is ready
     if (info.host === Office.HostType.Outlook) {
-        //headP.appendChild(document.createElement("p").appendChild(document.createTextNode("This is a new paragraph!")));
-        // Assign event handler to the button click
         document.getElementById("reportButton").onclick = parseMessage;
     }
 });
@@ -29,8 +27,8 @@ function parseMessage() {
         function (result) {
             if (result.status === Office.AsyncResultStatus.Succeeded) {
                 // Parse the message content
-                var messageContent = result.value;
-
+                let messageContent = result.value;
+                // Check if the message contains a report link
                 if (ridRegex.test(messageContent)) {
                     headP.innerHTML = "This mail is reported!";
                     let ridUrl = messageContent.match(ridRegex)[0];
@@ -39,18 +37,25 @@ function parseMessage() {
                     console.log(transformedURL);
                     webReport(transformedURL);
 
-                } else {
-                    headP.innerHTML = "This mail is not reported!";
+                }
+                // If the message does not contain a report link, still display a checkmark but no further action is taken
+                else {
+                    headP.innerHTML = "[Dev no rid] Successfully reported the mail, you can delete it now!";
+                    document.getElementById("reportButton").disabled = true;
+                    document.getElementById("wrapperId").insertAdjacentHTML("beforeend", checkmarkHTML);
+                    console.log(document.getElementById("wrapperId").innerHTML);
                 };
 
-            } else {
+            }
+            else {
                 console.error("Error getting item body: " + result.error.message);
             }
         }
     );
 }
 
-async function webReport(reportUrl) {     
+async function webReport(reportUrl) {
+    // Fetch the report URL     
     try {
         const response = await fetch(reportUrl);
 
@@ -89,7 +94,6 @@ function closeInfoBox() {
 };
 
 function openGitHub() {
-    // Redirect to your GitHub page or perform any GitHub-related action
     window.open("https://github.com/jole583/Goreport", "_blank");
 };
 

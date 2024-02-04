@@ -192,13 +192,12 @@ body {
 }
 #footText {
     display:inline;
-    line-height: 70px;
     float: right;
     padding-left: 5px;
     padding-right: 10px;
 }
 .footerContent img {
-    height: 45px;
+    height: 35px;
     width: auto;
     float: left;
 }
