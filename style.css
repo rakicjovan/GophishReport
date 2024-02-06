@@ -221,3 +221,8 @@ body {
 .info-box:hover {
     background-color: #2980b9;
 }
+
+#repoLinkButtonImage {
+    height: 30px;
+    width: auto;
+}

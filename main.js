@@ -1,15 +1,15 @@
-const ridAlternative = "keyname";
-
+let alternateRid = "keyname";
 let headP = document.getElementById("headP");
-let ridRegex = /https:\/\/[A-Za-z]+\.[A-Za-z][A-Za-z]\/\?rid=[A-Za-z0-9]+/i;
 let reportButton = document.getElementById("reportButton");
 let checkmarkHTML = '<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>';
 
 
 
-if (ridAlternative) {
-    ridRegex = new RegExp('https://[A-Za-z]+\\.[A-Za-z][A-Za-z]/\\?' + ridAlternative + '=[A-Za-z0-9]+', 'i');
-    console.log(ridRegex);
+let ridRegex;
+if (alternateRid !== "") {
+    ridRegex = new RegExp(`https:\/\/.*${alternateRid}=.{7}`);
+} else {
+    ridRegex = /https:\/\/.*rid=.{7}/;
 }
 
 Office.onReady((info) => {
@@ -31,10 +31,9 @@ function parseMessage() {
                 // Check if the message contains a report link
                 if (ridRegex.test(messageContent)) {
                     headP.innerHTML = "This mail is reported!";
-                    let ridUrl = messageContent.match(ridRegex)[0];
-                    console.log(ridUrl);
-                    let transformedURL = ridUrl.replace(/\?rid=\d+/, "report" + ridUrl.substring(ridUrl.indexOf('?')));
-                    console.log(transformedURL);
+                    let indexOfEqualSign = messageContent.match(ridRegex)[0].indexOf('=');
+                    let ridUrl = messageContent.match(ridRegex)[0].substr(0, indexOfEqualSign + 8);
+                    let transformedURL = addReportPrefix(ridUrl);
                     webReport(transformedURL);
 
                 }
@@ -54,19 +53,35 @@ function parseMessage() {
     );
 }
 
+function addReportPrefix(url) {
+    // Check if the URL contains a query string
+    if (url.includes('?')) {
+        // Split the URL into two parts: the base URL and the query string
+        const [baseUrl, queryString] = url.split('?');
+
+        // Add "report" in front of the query string
+        const newUrl = `${baseUrl}/report?${queryString}`;
+
+        return newUrl;
+    }
+
+    // If there is no query string, simply add "/report" to the end of the URL
+    return `${url}/report`;
+};
+
 async function webReport(reportUrl) {
     // Fetch the report URL     
     try {
         const response = await fetch(reportUrl);
 
-        if (!response.ok) {
+        if (!response.ok && response.status !== 204) {
             console.log("test");
-            reportButton.disabled = true;
+            document.getElementById("reportButton").disabled = true;
             throw new Error(response.status);
         }
         else {
-            headP.innerHTML = "Successfully reported the mail, you can delete it now!" + response.status;
-            reportButton.disabled = true;
+            headP.innerHTML = "Successfully reported the mail, you can delete it now!";
+            document.getElementById("reportButton").disabled = true;
             document.getElementById("wrapperId").insertAdjacentHTML("beforeend", checkmarkHTML);
             console.log(document.getElementById("wrapperId").innerHTML);
         }
