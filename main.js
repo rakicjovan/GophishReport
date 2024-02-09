@@ -109,7 +109,7 @@ function closeInfoBox() {
 };
 
 function openGitHub() {
-    window.open("https://github.com/jole583/Goreport", "_blank");
+    window.open("https://github.com/rakicjovan/Goreport", "_blank");
 };
 
 function addCheckmark() {
