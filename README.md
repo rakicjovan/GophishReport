@@ -48,4 +48,4 @@ The reason for that is, that way the user isn't directly able to tell which phis
 <h2>Why doesn't the Add In automatically remove the reported mail?</h2>
 
 Outlook Web Add Ins can't interact with mails in that way.
-To be able to move or delete mails, you would need to use the Graph API. this is doable but it would require a more complex backend and would be difficult to realize if you need to serve this to multiple customers with different tenants, for example if you're an MSP.
+To be able to move or delete mails, you would need to use the Graph API. This is doable but it would require a more complex backend and would be difficult to realize if you need to serve this to multiple customers with different tenants, for example if you're an MSP.
