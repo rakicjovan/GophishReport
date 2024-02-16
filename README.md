@@ -3,7 +3,7 @@ Outlook Add In for reporting Gophish Mails, for old and new Outlook Client.
 
 This Add In enables users to report supected phishing mails to a goreport instance without having to manually open the report link or forward the mail to a designated IMAP mailbox.
 <br>
-![Example Picture](assets/goreport_example.png)
+![Example Picture](assets/goreport_example_gif.gif)
 
 <h2>How to set up</h2>
 
