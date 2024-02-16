@@ -24,6 +24,7 @@ Outlook Web Add Ins have the benefit that they work on the old and new version o
 
 When the user opens a mail he can find the Goreport Add In next to his other Add Ins.
 He then can press a button to report the mail.
+<br>
 ![Example picture two](assets/goreport_example2.png)
 
 <h2>How does it work</h2>
