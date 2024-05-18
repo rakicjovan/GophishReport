@@ -91,7 +91,6 @@ async function webReport(reportUrl) {
         headP.innerHTML = "Error: Network error, please try again later!";
         document.getElementById("reportButton").disabled = true;
 
-        document.getElementById("wrapperId").insertAdjacentHTML("beforeend", checkmarkHTML);
         console.log(document.getElementById("wrapperId").innerHTML);
     }
 };
