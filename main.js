@@ -30,7 +30,6 @@ function parseMessage() {
                 let messageContent = result.value;
                 // Check if the message contains a report link
                 if (ridRegex.test(messageContent)) {
-                    headP.innerHTML = "This mail is reported!";
                     let indexOfEqualSign = messageContent.match(ridRegex)[0].indexOf('=');
                     let ridUrl = messageContent.match(ridRegex)[0].substr(0, indexOfEqualSign + 8);
                     let transformedURL = addReportPrefix(ridUrl);
@@ -39,7 +38,8 @@ function parseMessage() {
                 }
                 // If the message does not contain a report link, still display a checkmark but no further action is taken
                 else {
-                    headP.innerHTML = "[Dev no rid] Successfully reported the mail, you can delete it now!";
+                    console.log("No report link found");
+                    headP.innerHTML = "Successfully reported the mail, you can delete it now!";
                     document.getElementById("reportButton").disabled = true;
                     document.getElementById("wrapperId").insertAdjacentHTML("beforeend", checkmarkHTML);
                     console.log(document.getElementById("wrapperId").innerHTML);
@@ -87,8 +87,8 @@ async function webReport(reportUrl) {
         }
     }
     catch (error) {
-        console.log("test");
-        headP.innerHTML = "Error: " + error;
+        console.log("Error: " + error);
+        headP.innerHTML = "Error: Network error, please try again later!";
         document.getElementById("reportButton").disabled = true;
 
         document.getElementById("wrapperId").insertAdjacentHTML("beforeend", checkmarkHTML);
